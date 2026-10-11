@@ -16,7 +16,7 @@ public class HealthController {
     @Value("${app.ai.provider:mock}")
     private String aiProvider;
 
-    @GetMapping({"/", "/api/health"})
+    @GetMapping({"/", "/api/health", "/health"})
     public ResponseEntity<Map<String, Object>> healthCheck() {
         Map<String, Object> resp = new HashMap<>();
         resp.put("status", "online");
