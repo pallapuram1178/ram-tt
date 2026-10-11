@@ -19,13 +19,16 @@ api.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-// Response interceptor: handle 401 unauthorized
+// Response interceptor: handle 401 unauthorized & 403 session expiration
 api.interceptors.response.use(
   (response) => response,
   (error) => {
-    if (error.response && error.response.status === 401) {
-      // Clear token and redirect to login if session expired
-      if (window.location.pathname !== '/login') {
+    if (error.response) {
+      const isAuthUrl = error.config?.url?.includes('/auth/');
+      const isSessionError = error.response.status === 401 || 
+        (error.response.status === 403 && !localStorage.getItem('servicedesk_token'));
+
+      if (isSessionError && !isAuthUrl && window.location.pathname !== '/login') {
         localStorage.removeItem('servicedesk_token');
         localStorage.removeItem('servicedesk_user');
         window.location.href = '/login?sessionExpired=true';

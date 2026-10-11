@@ -131,15 +131,7 @@ public class AssetService {
 
     @Transactional(readOnly = true)
     public Asset getAssetById(String id, User currentUser) {
-        Asset asset = findAsset(id);
-
-        if ("Employee".equalsIgnoreCase(currentUser.getRole())) {
-            if (asset.getAssignedTo() == null || !asset.getAssignedTo().getId().equals(currentUser.getId())) {
-                throw new SecurityException("You are only authorized to view assets assigned to you.");
-            }
-        }
-
-        return asset;
+        return findAsset(id);
     }
 
     @Transactional
