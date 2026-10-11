@@ -11,19 +11,19 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/health")
 public class HealthController {
 
     @Value("${app.ai.provider:mock}")
     private String aiProvider;
 
-    @GetMapping
+    @GetMapping({"/", "/api/health"})
     public ResponseEntity<Map<String, Object>> healthCheck() {
         Map<String, Object> resp = new HashMap<>();
         resp.put("status", "online");
         resp.put("service", "ServiceDesk Pro API");
-        resp.put("timestamp", Instant.now());
+        resp.put("timestamp", Instant.now().toString());
         resp.put("aiEngine", aiProvider);
+        resp.put("message", "ServiceDesk Pro Spring Boot Backend is running smoothly.");
         return ResponseEntity.ok(resp);
     }
 }
