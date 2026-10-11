@@ -1,0 +1,14 @@
+{
+  "name": "servicedesk-pro-backend",
+  "version": "1.0.0",
+  "description": "Backend API for ServiceDesk Pro - Spring Boot 3 Java & Embedded Database",
+  "scripts": {
+    "start": "mvn spring-boot:run",
+    "dev": "mvn spring-boot:run",
+    "build": "mvn clean package -DskipTests",
+    "node-start": "node src-node-backup/server.js"
+  },
+  "keywords": ["servicedesk", "helpdesk", "asset-management", "spring-boot", "java"],
+  "author": "ServiceDesk Pro Team",
+  "license": "ISC"
+}
