@@ -1,0 +1,7 @@
+target/
+data/
+node_modules/
+src-node-backup/
+.git/
+.env
+*.log

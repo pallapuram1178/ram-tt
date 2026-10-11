@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: servicedesk-backend
+    ports:
+      - "5000:5000"
+    environment:
+      - SERVER_PORT=5000
+      - APP_AI_PROVIDER=mock
+      # Uncomment to use real AI:
+      # - APP_AI_GEMINI_API_KEY=${GEMINI_API_KEY}
+      # - APP_AI_OPENAI_API_KEY=${OPENAI_API_KEY}
+    volumes:
+      - servicedesk-data:/app/data
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        - VITE_API_URL=http://localhost:5000/api
+    container_name: servicedesk-frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+volumes:
+  servicedesk-data:
