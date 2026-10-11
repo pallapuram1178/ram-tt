@@ -25,7 +25,6 @@ COPY --from=build /app/target/servicedesk-pro-backend-1.0.0.jar app.jar
 # Application runs on port 5000
 EXPOSE 5000
 
-ENV SERVER_PORT=5000
 ENV SPRING_DATASOURCE_URL=jdbc:h2:file:/app/data/servicedesk;DB_CLOSE_DELAY=-1;AUTO_SERVER=TRUE
 
 # Run application
